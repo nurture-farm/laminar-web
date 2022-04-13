@@ -1,0 +1,165 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Laminar gRPC</h1>
+            <p class="lead">Initializer UI</p>
+        </div>
+    </div>
+    <div th:if="${message}">
+        <h2 th:text="${message}"/>
+        <br><br>
+    </div>
+
+    <div>
+        <form method="POST" enctype="multipart/form-data" action="/laminar/uploadFile">
+            <table cellpadding="15">
+                <tr><td>Upload Config File(config.json):</td><td><input class="form-control-file" type="file" name="configFile" /></td></tr>
+                <tr><td>Upload SQL Dump File(dump.sql):</td><td><input class="form-control-file" type="file" name="dumpFile" /></td></tr>
+                <tr><td>Upload Lam File(application.lam):</td><td><input class="form-control-file" type="file" name="lamFile" /></td></tr>
+                <tr><td></td><td><input type="submit" value="Upload Files" /></td></tr>
+            </table>
+        </form>
+        <br><br><br>
+    </div>
+
+    <div>
+        <h2 class="display-4">Sample Config Files</h2>
+        <br>
+        <h4 class="lead">
+            <b>Config.json</b>
+        </h4>
+        <pre>
+            {
+                "server": {
+                    "port": 6000,
+                    "api_hook": "farm.nurture.example.service.BackendControllerImpl",
+                    "startup_hook": "farm.nurture.example.service.StartupHookImpl"
+                },
+                "prometheus" : {
+                    "enabled": false,
+                    "port": 6005
+                },
+                "temporal_worker": {
+                    "enabled": false,
+                    "namespace": "default",
+                    "address": "localhost:7233",
+                    "task_queue": "MicroServiceWorker"
+                },
+                "proto": {
+                    "service_name": "ExampleService",
+                    "proto_generate_path": "proto",
+                    "java_generate_path": "/zerotouch/java/src/main",
+                    "java_override_path": "/core/java/src/main",
+                    "graphql_generate_path": "/graphql/src/main",
+                    "go_generate_path": "/zerotouch/golang",
+                    "go_override_path": "/core/golang",
+                    "namespace": "",
+                    "proto_package": "farm.nurture.core.contracts.ExampleService",
+                    "java_package": "farm.nurture.farm.service",
+                    "go_package": "ExampleService",
+                    "code_url": "code.nurture.farm",
+                    "graphql_uri": "/core/example_service",
+                    "code_generation_input_config_source": "LAM"
+                }
+            }
+        </pre>
+    </div>
+
+    <div>
+        <h4 class="lead">
+            <b>dump.sql</b>
+        </h4>
+        <pre>
+            DROP TABLE IF EXISTS `app_config`;
+
+            CREATE TABLE `app_config` (
+            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+            `title` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+            `req_name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+            `res_name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+            `decl_req` tinyint(1) NOT NULL DEFAULT '1',
+            `decl_res` tinyint(1) NOT NULL DEFAULT '1',
+            `decl_grpc` tinyint(1) NOT NULL DEFAULT '1',
+            `decl_grapql` tinyint(1) NOT NULL DEFAULT '1',
+            `sql_stmt` mediumtext COLLATE utf8mb4_unicode_ci,
+            `sql_params` mediumtext COLLATE utf8mb4_unicode_ci,
+            `sql_uniquekey` tinyint(1) DEFAULT '0',
+            `sql_replace` mediumtext COLLATE utf8mb4_unicode_ci,
+            `sql_pool` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+            `impl_dao` tinyint(1) NOT NULL DEFAULT '1',
+            `impl_grpc` tinyint(1) NOT NULL DEFAULT '1',
+            `impl_reacrjs` tinyint(1) NOT NULL DEFAULT '0',
+            `req_override` mediumtext COLLATE utf8mb4_unicode_ci,
+            `res_override` mediumtext COLLATE utf8mb4_unicode_ci,
+            `mutation` enum('I','U','D','S','-') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+            `oauth_public` tinyint(1) DEFAULT '1',
+            `oauth_claims` mediumtext COLLATE utf8mb4_unicode_ci,
+            `status` tinyint(1) DEFAULT '1',
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `title` (`title`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Application configuration';
+
+
+            DROP TABLE IF EXISTS `key_value_cache`;
+
+            CREATE TABLE `key_value_cache` (
+            `cache_key` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+            `value` mediumtext COLLATE utf8mb4_unicode_ci,
+            `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+            `modified_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`cache_key`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+        </pre>
+    </div>
+
+    <div>
+        <h4 class="lead">
+            <b>application.lam</b>
+        </h4>
+        <pre>
+        [
+            {
+            "title" : "FetchFromKeyValueCache",
+            "req_name" : "",
+            "res_name" : "",
+            "decl_req" : 1,
+            "decl_res" : 1,
+            "decl_grpc" : 1,
+            "decl_grapql" : 0,
+            "sql_stmt" : "select value from key_value_cache where cache_key=?;",
+            "sql_params" : "cache_key:key_value_cache.cache_key",
+            "sql_uniquekey" : 0,
+            "impl_dao" : 1,
+            "impl_grpc" : 1,
+            "null_sql_replace" : 1,
+            "sql_replace" : "",
+            "impl_reacrjs" : 0,
+            "req_override" : "",
+            "res_override" : "",
+            "mutation" : "S",
+            "oauth_public" : 0,
+            "oauth_claims" : "",
+            "status" : 1
+            }
+        ]
+        </pre>
+    </div>
+</div>
+
+</body>
+</html>
