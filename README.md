@@ -32,16 +32,16 @@ graph TD
 </div>
 
 ## Table of Contents
-1. [Required Dependencies](/nurture-farm/laminar-web/wiki/Required-Dependencies)
-2. [Quickstart Guide](/nurture-farm/laminar-web/wiki/Quickstart-Guide)
-3. [Example input files with explanation](/nurture-farm/laminar-web/wiki/Example-input-files-with-explanation)
-4. [Example Generated Service](/nurture-farm/laminar-web/wiki/Example-Generated-Service)
-5. [Example Generated Files](/nurture-farm/laminar-web/wiki/Example-Generated-Files)
-6. [Overview of generated files by Laminar](/nurture-farm/laminar-web/wiki/Overview-of-Generated-Files-by-Laminar)
-7. [Deploying your Microservice](/nurture-farm/laminar-web/wiki/Deploying-your-Microservice)
-8. [More things you can do with Laminar with examples](/nurture-farm/laminar-web/wiki/More-things-you-can-do-with-Laminar-with-examples)
-9. [How to Run Laminar in Local](/nurture-farm/laminar-web/wiki/How-to-Run-Laminar-in-Local)
-10. [Architecture](/nurture-farm/laminar-web/wiki/Architecture)
-11. [How to Contribute](/nurture-farm/laminar-web/wiki/How-to-Contribute)
-12. [Credits](/nurture-farm/laminar-web/wiki/Credits)
+1. [Required Dependencies](https://github.com/nurture-farm/laminar-web/wiki/Required-Dependencies)
+2. [Quickstart Guide](https://github.com/nurture-farm/laminar-web/wiki/Quickstart-Guide)
+3. [Example input files with explanation](https://github.com/nurture-farm/laminar-web/wiki/Example-input-files-with-explanation)
+4. [Example Generated Service](https://github.com/nurture-farm/laminar-web/wiki/Example-Generated-Service)
+5. [Example Generated Files](https://github.com/nurture-farm/laminar-web/wiki/Example-Generated-Files)
+6. [Overview of generated files by Laminar](https://github.com/nurture-farm/laminar-web/wiki/Overview-of-Generated-Files-by-Laminar)
+7. [Deploying your Microservice](https://github.com/nurture-farm/laminar-web/wiki/Deploying-your-Microservice)
+8. [More things you can do with Laminar with examples](https://github.com/nurture-farm/laminar-web/wiki/More-things-you-can-do-with-Laminar-with-examples)
+9. [How to Run Laminar in Local](https://github.com/nurture-farm/laminar-web/wiki/How-to-Run-Laminar-in-Local)
+10. [Architecture](https://github.com/nurture-farm/laminar-web/wiki/Architecture)
+11. [How to Contribute](https://github.com/nurture-farm/laminar-web/wiki/How-to-Contribute)
+12. [Credits](https://github.com/nurture-farm/laminar-web/wiki/Credits)
 
